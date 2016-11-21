@@ -13,7 +13,5 @@ You should be able to run the docker container using something along the lines
 of:
 
 ```bash
-docker run --rm -ti 
-  -v `pwd`:/files \
-  pablozaiden/media-converter
+docker run --rm -ti -v `pwd`:/files pablozaiden/docker-media-converter
 ```
