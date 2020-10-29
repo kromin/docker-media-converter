@@ -12,5 +12,5 @@ RUN apt-get -qq update \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
-ADD entrypoint.sh .
+COPY entrypoint.sh .
 CMD ["/entrypoint.sh"]
