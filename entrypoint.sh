@@ -4,6 +4,14 @@
 
 cd /files
 
+while true
+do
+echo "Watch new mkv..."
+
+find `pwd` -type f -name "*.mkv" | while read file; do
+echo "Founded: $file"
+done
+
 find `pwd` -type f -name "*.mkv" | while read file; do
   echo "Now converting: $file"
   m_filename=`basename "$file"`
@@ -16,7 +24,7 @@ find `pwd` -type f -name "*.mkv" | while read file; do
     output_dir="`pwd`"
   fi
   m_newfilename="${output_dir}/${m_filename_wo_ext}.mp4"
-  avconv -loglevel error -y -i "$file" -c:v copy -c:a aac -strict experimental "$m_newfilename"
+  ffmpeg -loglevel info -y -i "$file" -c:v copy -c:a aac "$m_newfilename"
   if [ "$?" -eq 0 ]; then
     echo "Successfully processed: $file"
     if [ -n "${DELETE_ORIGINAL_ON_SUCCESS:+x}" ]; then
@@ -30,4 +38,8 @@ find `pwd` -type f -name "*.mkv" | while read file; do
   # Pause for 3 seconds before moving on to the next file
   sleep 3
 
+done
+
+echo "Sleep 5 minutes"
+sleep 5m
 done
